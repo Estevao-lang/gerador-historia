@@ -1,0 +1,3 @@
+Flask==3.0.1
+reportlab==4.0.9
+xhtml2pdf==0.2.14
