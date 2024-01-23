@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user_data.nome }} - Currículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/curriculum.css') }}">
+    <!-- Adicione outros metadados ou links de estilo conforme necessário -->
+</head>
+
+<body>
+    <main>
+        <div class='info'>
+            <h1 style="text-align: center;">{{ user_data.nome }}</h1>
+            <p>Data de Nascimento: {{ user_data.dataNascimento }}</p>
+            <p>Email: {{ user_data.email }}</p>
+            <p>Telefone: {{ user_data.telefone }}</p>
+            <p>Bairro: {{ user_data.bairro }}</p>
+            <p>Cidade: {{ user_data.cidade }}</p>
+            <p>Estado: {{ user_data.estado }}</p>
+        </div>
+        
+        <section>
+            <div class='conteudo'>
+                <h2>Objetivos Profissionais</h2>
+                <hr>
+                <p>{{ user_data.objetivos }}</p>
+
+                <h2>Formação Acadêmica</h2>
+                <hr>
+                <p>Instituição: {{ user_data.instituicao_ensino }}</p>
+                <p>Nível: {{ user_data.nivel }}</p>
+                <p>Período: {{ user_data.periodo }}</p>
+                <p>Semestre: {{ user_data.semestre }}</p>
+                <p>Curso: {{ user_data.curso }}</p>
+
+                <h2>Habilidades</h2>
+                <hr>
+                <ul class="habilidades">
+                    {% for habilidade in user_data.habilidades %}
+                        <li>{{ habilidade }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <!-- Adicione mais informações pessoais conforme necessário -->
+        <!-- Adicione mais seções conforme necessário -->
+    </main>
+</body>
+
+</html>
