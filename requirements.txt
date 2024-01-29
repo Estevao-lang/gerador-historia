@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 Flask==3.0.1
 reportlab==4.0.9
 xhtml2pdf==0.2.14
+=======
+Flask==3.0.1
+reportlab==4.0.9
+xhtml2pdf==0.2.14
+>>>>>>> b49423934eade625f00e07a9fff1d2661e6cd541
 gunicorn==21.2.0
