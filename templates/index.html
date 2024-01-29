@@ -199,7 +199,7 @@
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Aprendizado rápido
-													<input type="checkbox" id="Aprendizado Rápido"
+													<input type="checkbox" id="aprendizado-rapido"
 														name="Aprendizado Rápido" value="Aprendizado Rápido">
 													<span class="checkmark"></span>
 												</label>
@@ -223,16 +223,16 @@
 												</label>
 
 												<label class="checkbox-container">Word Básico
-													<input type="checkbox" id="word" name="word" value="Word Básico">
+													<input type="checkbox" id="word" name="word-basico" value="Word Básico">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Word Intermediário
-													<input type="checkbox" id="word" name="word"
+													<input type="checkbox" id="word-intermediario" name="word"
 														value="Word Intermediário">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Word Avançado
-													<input type="checkbox" id="word" name="word" value="Word Avançado">
+													<input type="checkbox" id="word-avancado" name="word" value="Word Avançado">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Lógica de programação
@@ -261,32 +261,32 @@
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Inglês Básico
-													<input type="checkbox" id="ingles" name="ingles-basico"
+													<input type="checkbox" id="ingles-basico" name="ingles-basico"
 														value="Inglês Básico">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Inglês Intermediário
-													<input type="checkbox" id="ingles" name="ingles-intermediario"
+													<input type="checkbox" id="ingles-intermediario" name="ingles-intermediario"
 														value="Inglês Intermediário">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Inglês Avançado
-													<input type="checkbox" id="ingles" name="ingles-avancado"
+													<input type="checkbox" id="ingles-avancado" name="ingles-avancado"
 														value="Inglês Avançado">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Espanhol Básico
-													<input type="checkbox" id="espanhol" name="espanhol-basico"
+													<input type="checkbox" id="espanhol-basico" name="espanhol-basico"
 														value="Espanhol Básico">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Espanhol Intermediário
-													<input type="checkbox" id="espanhol" name="espanhol-intermediario"
+													<input type="checkbox" id="espanhol-intermediario" name="espanhol-intermediario"
 														value="Espanhol Intermediário">
 													<span class="checkmark"></span>
 												</label>
 												<label class="checkbox-container">Espanhol Avançado
-													<input type="checkbox" id="espanhol" name="espanhol-avancado"
+													<input type="checkbox" id="espanhol-avancado" name="espanhol-avancado"
 														value="Espanhol Avançado">
 													<span class="checkmark"></span>
 												</label>
@@ -405,11 +405,18 @@
 											</div>
 										</div>
 										<div class="button-container">
-											<button type="button" onclick="previousStep('step2')"
-												class="btn btn-secondary">Voltar</button>
-											<input type="submit" class="btn btn-primary" id="generatePdfButton"
-												value="Avançar">
+											<button type="button" onclick="previousStep('step2')" class="btn btn-secondary">Voltar</button>
+											
+												<input type="submit" class="btn btn-primary" onclick="funcao1()" value="Avançar">
+											
 										</div>
+										<script>
+											function funcao1() {
+												alert("Seu currículo foi baixado com sucesso! Verifique a pasta de downloads.");
+
+											}
+										</script>
+										
 								</form>
 							</div>
 						</div>

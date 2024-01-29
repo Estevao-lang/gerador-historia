@@ -1,15 +1,19 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, session, redirect, url_for
 from reportlab.pdfgen import canvas
 
 app = Flask(__name__)
+app.secret_key = 'vocacao'  # Defina uma chave secreta para a sessão
 
 # Predefined list of skills
 habilidades = [
     'comunicacao', 'trabalho-em-equipe', 'resolucao-de-problemas',
-    'adaptabilidade', 'aprendizado-rapido', 'excel', 'word',
-    'logica-programacao', 'design-grafico', 'analise-de-dados',
-    'gestao-de-projetos', 'ingles', 'espanhol'
+    'adaptabilidade', 'aprendizado-rapido', 'excel-basico', 'excel-intermediario',
+    'excel-avancado', 'word-basico', 'word-intermediario', 'word-avancado',
+    'logica-programacao', 'design-grafico', 'analise-de-dados', 'power-bi',
+    'gestao-de-projetos', 'ingles-basico', 'ingles-intermediario', 'ingles-avancado',
+    'espanhol-basico', 'espanhol-intermediario', 'espanhol-avancado'
 ]
+
 
 @app.route('/')
 def index():
@@ -39,6 +43,9 @@ def generate_pdf():
         'habilidades': [habilidade for habilidade in habilidades if habilidade in request.form]
     }
 
+    # Armazena user_data na sessão
+    session['user_data'] = user_data
+
     # Renderiza a página HTML com os dados do usuário
     rendered_html = render_template('curriculum.html', user_data=user_data)
 
@@ -51,6 +58,23 @@ def generate_pdf():
     response.headers['Content-Type'] = 'application/pdf'
 
     return response
+
+# Adicione user_data como argumento para a função render_template em 'itens.html'
+@app.route('/itens')
+def itens():
+    # Obtém user_data da sessão
+    user_data = session.get('user_data')
+
+    # Verifica se user_data foi definido
+    if user_data is None:
+        # Redireciona para a página inicial ou realiza outra ação adequada
+        return redirect('/')
+    
+    # Debug: Imprima os dados para verificar se estão corretos
+    print(user_data)
+
+    # Renderiza a página 'itens.html' com os dados do usuário
+    return render_template('itens.html', user_data=user_data)
 
 def generate_pdf_from_html(html):
     from io import BytesIO

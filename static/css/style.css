@@ -2176,6 +2176,29 @@ li a:hover,
 	margin-bottom: 30px;
 }
 
+
+@media screen and (max-width: 700px) {
+    .col-xs-10 {
+        display: flex;
+       
+		justify-content: center;
+		margin-left:40px;
+	
+      
+    }
+
+	.button-container{
+		margin-top:-10px ;
+	}
+
+
+    .button-container {
+        padding: 50px;
+    }
+}
+
+
+
 .slider-form .slide--bio {
 	font-size: 22px;
 	line-height: 32px;
@@ -2185,7 +2208,9 @@ li a:hover,
 .slider-form .slide--action {
 	background: #ffffff;
 	padding: 50px;
-	height: 900px;
+	height: 70em;
+
+
 }
 
 .slider-form .slide--action h6 {
