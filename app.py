@@ -1,5 +1,14 @@
 from flask import Flask, render_template, request, make_response, session, redirect, url_for
 from reportlab.pdfgen import canvas
+import platform
+
+# Verifica se o sistema é Windows
+if platform.system() == 'Windows':
+    import multiprocessing
+    
+    # Esta linha é necessária para evitar o erro relacionado ao módulo 'fcntl' no Windows
+    multiprocessing.freeze_support()
+
 
 app = Flask(__name__)
 app.secret_key = 'vocacao'  # Defina uma chave secreta para a sessão
