@@ -22,23 +22,23 @@
             <p>Cidade: {{ user_data.cidade }}</p>
             <p>Estado: {{ user_data.estado }}</p>
         </div>
-        
+        <hr>
         <section>
             <div class='conteudo'>
                 <h2>Objetivos Profissionais</h2>
-                <hr>
+              
                 <p>{{ user_data.objetivos }}</p>
-
-                <h2>Formação Acadêmica</h2>
                 <hr>
+                <h2>Formação Acadêmica</h2>
+                
                 <p>Instituição: {{ user_data.instituicao_ensino }}</p>
                 <p>Nível: {{ user_data.nivel }}</p>
                 <p>Período: {{ user_data.periodo }}</p>
                 <p>Semestre: {{ user_data.semestre }}</p>
                 <p>Curso: {{ user_data.curso }}</p>
-
-                <h2>Habilidades</h2>
                 <hr>
+                <h2>Habilidades</h2>
+           
                 <ul class="habilidades">
                     {% for habilidade in user_data.habilidades %}
                         <li>{{ habilidade }}</li>
