@@ -611,29 +611,7 @@
 			}
 		});
 	</script>
-	<script>
-		document.getElementById('avancar').addEventListener('click', function (e) {
-			// Seleciona todos os campos obrigatórios
-			var camposObrigatorios = document.querySelectorAll('[required]');
 
-			var todosPreenchidos = true;
-
-			// Verifica se todos os campos obrigatórios estão preenchidos
-			camposObrigatorios.forEach(function (campo) {
-				if (campo.value === '') {
-					todosPreenchidos = false;
-				}
-			});
-
-			if (!todosPreenchidos) {
-				// Informe ao usuário que todos os campos obrigatórios devem ser preenchidos.
-				alert('Por favor, preencha todos os campos obrigatórios antes de avançar. Seu currículo ficará incompleto :(');
-
-				// Impede o comportamento padrão do botão (navegar para a próxima página)
-				e.preventDefault();
-			}
-		});
-	</script>
 
 
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
