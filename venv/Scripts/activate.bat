@@ -8,7 +8,11 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
+<<<<<<< HEAD
 set VIRTUAL_ENV=C:\Users\estev\OneDrive\Área de Trabalho\gera-trampo-cv\venv
+=======
+set VIRTUAL_ENV=C:\Users\egabriel\Desktop\cv-gera-trampo\venv
+>>>>>>> d5f5ead9fa6c517f73d7a24e829f135b8e5190ea
 
 if not defined PROMPT set PROMPT=$P$G
 

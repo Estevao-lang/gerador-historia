@@ -1,5 +1,9 @@
 # This file must be used with "source bin/activate" *from bash*
+<<<<<<< HEAD
 # you cannot run it directly
+=======
+# You cannot run it directly
+>>>>>>> d5f5ead9fa6c517f73d7a24e829f135b8e5190ea
 
 deactivate () {
     # reset old environment variables
@@ -38,8 +42,20 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV="C:\Users\estev\OneDrive\Área de Trabalho\gera-trampo-cv\venv"
 export VIRTUAL_ENV
+=======
+# on Windows, a path can contain colons and backslashes and has to be converted:
+if [ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ] ; then
+    # transform D:\path\to\venv to /d/path/to/venv on MSYS
+    # and to /cygdrive/d/path/to/venv on Cygwin
+    export VIRTUAL_ENV=$(cygpath "C:\Users\egabriel\Desktop\cv-gera-trampo\venv")
+else
+    # use the path as-is
+    export VIRTUAL_ENV="C:\Users\egabriel\Desktop\cv-gera-trampo\venv"
+fi
+>>>>>>> d5f5ead9fa6c517f73d7a24e829f135b8e5190ea
 
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/Scripts:$PATH"

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<!-- Document Meta
+    ============================================= -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!--IE Compatibility Meta-->
+	<meta name="author" content="zytheme" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description" content="Multi-purpose Business html5 landing page">
+	<link href="../static/images/favicon/favicon.ico" rel="icon">
+
+	<!-- Fonts
+    ============================================= -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700' rel='stylesheet' type='text/css'>
+
+	<!-- Stylesheets
+    ============================================= -->
+
+	<link rel="stylesheet" href="../static/css/style.css">
+	<link rel="stylesheet" href="../static/css/external.css">
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+	
+
+	<script>
+		document.getElementById('cep').addEventListener('blur', function () {
+			var cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos do CEP
+
+			if (cep.length === 8) {
+				// Faça uma solicitação à API de consulta de CEP para obter os detalhes do endereço
+				fetch(`https://viacep.com.br/ws/${cep}/json/`)
+					.then(response => {
+						if (!response.ok) {
+							throw new Error('Erro na solicitação à API.');
+						}
+						return response.json();
+					})
+					.then(data => {
+						document.getElementById('logradouro').value = data.logradouro || '';
+						document.getElementById('bairro').value = data.bairro || '';
+						document.getElementById('cidade').value = data.localidade || '';
+						document.getElementById('estado').value = data.uf || '';
+					})
+					.catch(error => {
+						console.log(error);
+						// Lidar com erros, como exibir uma mensagem de erro ao usuário
+					});
+			}
+		});
+	</script>
+
+
+	<!-- Document Title
+    ============================================= -->
+	<title>ViraTrampo | Crie o seu curriculo</title>
+</head>
+
+<body class="body-scroll">
+	<!-- Document Wrapper
+	============================================= -->
+	<div id="wrapper" class="wrapper clearfix">
+
+		<!-- Header
+        ============================================= -->
+		<header id="navbar-spy" class="header header-1 header-transparent header-fixed">
+			<nav id="primary-menu" class="navbar navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+							data-target="#navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="logo" href="">
+							<img class="logo-dark" src="../static/images/logo/logo-dark-trampo.png"
+								alt="ViraTrampo Logo">
+							<img class="logo-light" src="../static/images/logo/logo-light-trampo.png"
+								alt="ViraTrampo Logo">
+						</a>
+					</div>
+					<div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+						<ul class="nav navbar-nav nav-pos-right navbar-left nav-split">
+							<li class="active"><a data-scroll="scrollTo" href="#slider">Inicio</a>
+							</li>
+							<li><a data-scroll="scrollTo" href="#cta">Vagas</a>
+							</li>
+						</ul>
+					</div>
+					<!--/.nav-collapse -->
+				</div>
+			</nav>
+		</header>
+
+		<!-- Slider #1
+		============================================= -->
+		<section id="slider" class="section slider slider-form">
+			<div class="slide--item bg-theme">
+				<div class="container">
+					<div class="row row-content">
+						<div class="col-xs-12 col-sm-6 col-md-5 pt-100">
+							<div class="slide--headline">Viu uma vaga de Jovem Aprendiz e não tem currículo?</div>
+							<div class="slide--bio">Crie o seu rápido e gratuito!
+							</div>
+						</div>
+						<div class="col-xs-10 col-sm-6 col-md-5 col-md-offset-2">
+							<div class="slide--action">
+								<h6>Crie o seu currículo aqui!</h6>
+								<p>Em poucos passos você poderá criar e compartilhar o seu curriculo de forma gratuita
+								</p>
+								<form action="/generate-pdf" method="post" class="mb-0">
+									<!-- Botão para acessar a visualização em tempo real do PDF -->
+									<a href="/preview-pdf" target="_blank">Visualizar PDF em Tempo Real</a>
+									<div class="step " id="step1">
+										<input type="hidden" name="item_id" value="{{ item_id }}">
+										<h4 class="step-texto">Contato</h4>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="nome" placeholder="Seu Nome"
+													class="form-control">
+											</div><br>
+											<div class="col-sm-12">
+												<input type="date" name="dataNascimento" id="dataNascimento"
+													placeholder="Data de nascimento" class="form-control"
+													max="{{ current_date }}">
+											</div><br>
+											<div class="col-sm-12">
+												<input type="text" name="email" placeholder="Seu email"
+													class="form-control">
+											</div><br>
+											<div class="col-sm-12">
+												<input class="form-control" placeholder="Seu Whatsapp" type="text"
+													id="telefone" name="telefone" maxlength="15"
+													oninput="formatPhoneNumber(this)">
+											</div>
+										</div>
+										<h3 class="step-texto">Endereço</h3>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" placeholder="Digite seu CEP" id="cep" name="cep"
+													maxlength="9" class="form-control">
+											</div>
+											<div class="col-sm-8">
+												<input type="text" name="logradouro" id="logradouro" placeholder="Rua"
+													class="form-control">
+											</div>
+											<div class="col-sm-4 ">
+												<input type="text" name="numero" id="numero" placeholder="Numero"
+													class="form-control">
+											</div>
+											<div class="col-sm-6 ">
+												<input type="text" name="complemento" id="complemento"
+													placeholder="Complemento" class="form-control">
+											</div>
+											<div class="col-sm-6 ">
+												<input type="text" name="bairro" id="bairro" placeholder="Bairro"
+													class="form-control">
+											</div>
+											<div class="col-sm-6 ">
+												<input type="text" name="cidade" id="cidade" placeholder="Cidade"
+													class="form-control">
+											</div>
+											<div class="col-sm-6 ">
+												<input type="text" name="estado" id="estado" placeholder="Estado"
+													class="form-control">
+											</div>
+										</div>
+										<br>
+										<div class="button-container">
+											<button type="button" onclick="nextStep('step2')" class="btn btn-primary"
+												id="avancar">Avançar</button>
+										</div>
+									</div>
+									<div class="step" id="step2">
+										<div class="row">
+											<h3 class="step-texto">Selecione as suas habilidades</h3>
+											<div class="scrollable-div" style="max-height: 300px; overflow: auto;">
+												<label class="checkbox-container">Comunicação
+													<input type="checkbox" id="comunicacao" name="comunicacao"
+														value="Comunicação">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Trabalho em equipe
+													<input type="checkbox" id="trabalho-em-equipe"
+														name="trabalho-em-equipe" value="Trabalho em equipe">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Resolução de problemas
+													<input type="checkbox" id="resolucao-de-problemas"
+														name="resolucao-de-problemas" value="Resolucao de problemas">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Adaptabilidade
+													<input type="checkbox" id="adaptabilidade" name="adaptabilidade"
+														value="Adaptabilidade">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Aprendizado rápido
+													<input type="checkbox" id="aprendizado-rapido"
+														name="aprendizado-rapido" value="Aprendizado Rápido">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Excel Básico
+													<input type="checkbox" id="excel-basico"
+														name="excel-basico" value="Excel Básico">
+													<span class="checkmark"></span>
+												</label>
+
+												<label class="checkbox-container">Excel Intermediário
+													<input type="checkbox" id="excel-intermediario"
+														name="excel-intermediario"
+														value="Excel Intermediário">
+													<span class="checkmark"></span>
+												</label>
+
+												<label class="checkbox-container">Excel Avançado
+													<input type="checkbox" id="excel-avancado"
+														name="excel-avancado" value="Excel Avançado">
+													<span class="checkmark"></span>
+												</label>
+
+												<label class="checkbox-container">Word Básico
+													<input type="checkbox" id="word" name="word-basico" value="Word Básico">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Word Intermediário
+													<input type="checkbox" id="word-intermediario" name="word-intermediario"
+														value="Word Intermediário">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Word Avançado
+													<input type="checkbox" id="word-avancado" name="word-avancado" value="Word Avançado">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Lógica de programação
+													<input type="checkbox" id="logica-programacao"
+														name="logica-programacao" value="logica-programacao">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Design Gráfico
+													<input type="checkbox" id="design-grafico" name="design-grafico"
+														value="design-grafico">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Análise de Dados
+													<input type="checkbox" id="analise-de-dados" name="analise-de-dados"
+														value="analise-de-dados">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Power BI
+													<input type="checkbox" id="power-bi" name="power-bi"
+														value="Power BI">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Gestão de Projetos
+													<input type="checkbox" id="gestao-de-projetos"
+														name="gestao-de-projetos" value="gestao-de-projetos">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Inglês Básico
+													<input type="checkbox" id="ingles-basico" name="ingles-basico"
+														value="Inglês Básico">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Inglês Intermediário
+													<input type="checkbox" id="ingles-intermediario" name="ingles-intermediario"
+														value="Inglês Intermediário">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Inglês Avançado
+													<input type="checkbox" id="ingles-avancado" name="ingles-avancado"
+														value="Inglês Avançado">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Espanhol Básico
+													<input type="checkbox" id="espanhol-basico" name="espanhol-basico"
+														value="Espanhol Básico">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Espanhol Intermediário
+													<input type="checkbox" id="espanhol-intermediario" name="espanhol-intermediario"
+														value="Espanhol Intermediário">
+													<span class="checkmark"></span>
+												</label>
+												<label class="checkbox-container">Espanhol Avançado
+													<input type="checkbox" id="espanhol-avancado" name="espanhol-avancado"
+														value="Espanhol Avançado">
+													<span class="checkmark"></span>
+												</label>
+											</div>
+										</div>
+										<br>
+										<div class="button-container">
+											<button type="button" onclick="previousStep('step1')"
+												class="btn btn-secondary">Etapa anterior</button>
+											<button type="button" onclick="nextStep('step3')" class="btn btn-primary"
+												id="avancar">Avançar</button>
+										</div>
+									</div>
+
+									<div class="step item" id="step3">
+										<h3 class="modern-title-secundary">Objetivos</h3>
+										<div class="espaco-select">
+											<select id="objetivos" name="objetivos" class="form-control">
+												<option value="">Selecione o seu objetivo</option>
+												<option value="Jovem Aprendiz">Jovem Aprendiz
+												</option>
+												<option value="Estágio">Estágio
+												</option>
+											</select>
+										</div>
+										<div class="espaco-select">
+											<select id="area" name="area" class="form-control">
+												<option value="">Selecione uma área de interesse</option>
+												<option value="Administração">Administração</option>
+												<option value="Atendimento ao Cliente">Atendimento ao Cliente</option>
+												<option value="Auxiliar Administrativo">Auxiliar Administrativo</option>
+												<option value="Auxiliar de Escritório">Auxiliar de Escritório</option>
+												<option value="Comércio">Comércio</option>
+												<option value="Contabilidade">Contabilidade</option>
+												<option value="Eletrônica">Eletrônica</option>
+												<option value="Informática">Informática</option>
+												<option value="Logística">Logística</option>
+												<option value="Marketing">Marketing</option>
+												<option value="Recursos Humanos">Recursos Humanos</option>
+												<option value="Saúde Bucal">Saúde Bucal</option>
+												<option value="Segurança do Trabalho">Segurança do Trabalho</option>
+												<option value="Serviços Gerais">Serviços Gerais</option>
+												<option value="Telemarketing">Telemarketing</option>
+												<option value="Vendas">Vendas</option>
+											</select>
+										</div>
+
+										<h3 class="modern-title-secundary">Formação</h3>
+										<div class="row">
+											<div class="col-sm-12">
+												<input type="text" name="instituicao_ensino" id="instituicao_ensino"
+													placeholder="Digite o nome da sua escola ou universidade"
+													class="form-control" required>
+
+												<div class="espaco-select">
+													<select id="nivel" name="nivel" onchange="mostrarPeriodos();"
+														class="form-control">
+														<option value="">Selecione um nível de ensino</option>
+														<option value="Ensino Fundamental">Ensino Fundamental</option>
+														<option value="Ensino Médio">Ensino Médio</option>
+														<option value="Ensino Técnico">Ensino Técnico</option>
+														<option value="Graduação">Graduação</option>
+													</select>
+												</div>
+												<div class="col-sm-12">
+													<h6 for="periodo" id="labelPeriodo"></h6>
+													<label for="periodo" id="labelPeriodo" class="form-control"
+														style="display: none;"></label>
+													<select id="periodo" name="periodo" class="form-control"
+														style="display: none;">
+														<option value="">Selecione um período</option>
+													</select>
+													<h6 for="semestre" id="labelSemestre"></h6>
+													<label for="semestre" id="labelSemestre" class="form-control"
+														style="display: none;">Selecione
+														o
+														Semestre:</label>
+													<select id="semestre" name="semestre" style="display: none;"
+														class="form-control">
+														<option value="">Selecione um semestre</option>
+													</select>
+													<h6 for="curso" id="labelCurso"></h6>
+													<label for="curso" id="labelCurso" class="form-control"
+														style="display: none;">Curso:</label>
+													<select id="curso" name="curso" class="form-control"
+														style="display: none;">
+														<option value="">Selecione um curso</option>
+														<option value="engenharia">Engenharia</option>
+														<option value="administracao">Administração</option>
+														<option value="direito">Direito</option>
+														<option value="medicina">Medicina</option>
+														<option value="pedagogia">Pedagogia</option>
+														<option value="ciencias-contabeis">Ciências Contábeis</option>
+														<option value="enfermagem">Enfermagem</option>
+														<option value="psicologia">Psicologia</option>
+														<option value="recursos-humanos">Recursos Humanos</option>
+														<option value="gestao-pessoas">Gestão de Pessoas</option>
+														<option value="servico-social">Serviço Social</option>
+														<option value="engenharia-producao">Engenharia de Produção
+														</option>
+														<option value="marketing">Marketing</option>
+														<option value="publicidade-propaganda">Publicidade e Propaganda
+														</option>
+														<option value="educacao-fisica">Educação Física</option>
+														<option value="arquitetura-urbanismo">Arquitetura e Urbanismo
+														</option>
+														<option value="jornalismo">Jornalismo</option>
+														<option value="medicina-veterinaria">Medicina Vetérinaria
+														</option>
+														<option value="ads">Analise e Desenvolvimento de Sistemas
+														</option>
+														<option value="ciencia-computacao">Ciência da Computação
+														</option>
+													</select>
+												</div>
+											</div>
+										</div>
+										<!-- Adicione as bibliotecas necessárias -->
+
+										<div class="button-container">
+											<button type="button" onclick="previousStep('step2')" class="btn btn-secondary">Voltar</button>
+											
+												<input type="submit" class="btn btn-primary" onclick="funcao1()" value="Avançar">
+											
+										</div>
+										<script>
+											function funcao1() {
+												alert("Seu currículo foi baixado com sucesso! Verifique a pasta de downloads.");
+
+											}
+										</script>
+
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- .row end -->
+				</div>
+				<!-- .container end -->
+			</div>
+			<!-- .slide-item end -->
+		</section>
+		<!-- #slider end -->
+
+		<!-- Feature #1
+		============================================= -->
+		<section id="feature1" class="section feature feature-left bg-white">
+			<div class="container">
+				<div class="row">
+					<!-- Panel #1 -->
+					<div class="col-xs-12 col-sm-4 col-md-4">
+						<div class="feature-panel wow fadeInUp" data-wow-duration="1s">
+							<div class="feature--content">
+								<h3> O que é preciso para ser jovem aprendiz?</h3>
+								<p>Pra ser jovem aprendiz, você precisa ter entre 14 e 24 anos, estar estudando no
+									ensino médio ou equivalente e não ter trabalhado antes. Também é importante ter
+									vontade de aprender e se dedicar, porque o programa quer te ajudar a crescer!</p>
+							</div>
+						</div>
+						<!-- .feature-panel end -->
+					</div>
+					<!-- .col-md-4 end -->
+
+					<!-- Panel #2 -->
+					<div class="col-xs-12 col-sm-4 col-md-4">
+						<div class="feature-panel wow fadeInUp" data-wow-duration="1s">
+							<div class="feature--content">
+								<h3 class="h3-principal">Ser jovem aprendiz é seguro?</h3>
+								<p>Com certeza! Ser jovem aprendiz é seguro e tudo é organizado pelas leis do trabalho.
+									O ambiente de trabalho é seguro, você tem um salário justo e benefícios, além de uma
+									carga horária que não atrapalha os estudos."</p>
+							</div>
+						</div>
+						<!-- .feature-panel end -->
+					</div>
+					<!-- .col-md-4 end -->
+
+					<!-- Panel #3 -->
+					<div class="col-xs-12 col-sm-4 col-md-4">
+						<div class="feature-panel wow fadeInUp" data-wow-duration="1s">
+							<div class="feature--content">
+								<h3>Como isso ajuda na minha carreira</h3>
+								<p>Ser jovem aprendiz é uma ótima oportunidade para sua carreira! Você ganha experiência
+									real de trabalho, aprende coisas novas, conhece pessoas importantes da área e ainda
+									deixa seu currículo mais atrativo para futuros empregos.</p>
+							</div>
+						</div>
+						<!-- .feature-panel end -->
+					</div>
+					<!-- .col-md-4 end -->
+				</div>
+				<!-- .row end -->
+			</div>
+			<!-- .container end -->
+		</section>
+		<!-- #feature2 end -->
+	</div>
+	<!-- .row end 
+			</div>-->
+	<!-- .container end -->
+	</section>
+	<!-- #feature2 end -->
+
+	<!-- Divider
+		============================================= -->
+	<section class="pt-0 pb-0">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<hr class="feature-divider">
+				</div>
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+
+	<!-- Action #1
+		============================================= -->
+	<section id="cta" class="section cta text-center ">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h3 class="heading--title">Acompanhe as vagas</h3>
+					<p class="heading--desc">Ser jovem aprendiz é uma ótima oportunidade para sua carreira! Você ganha
+						experiência real de trabalho, aprende coisas novas, conhece pessoas importantes da área e ainda
+						deixa seu currículo mais atrativo para futuros empregos.</p>
+					<a class="btn btn--primary" href="#">Clique aqui!</a>
+				</div>
+				<!-- .col-md-12 end -->
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+	<!-- #cta end -->
+
+	<!-- Footer 
+		============================================= -->
+	<footer id="footer" class="footer footer-5">
+		<!-- Copyrights
+			============================================= -->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12">
+					<div class="footer--copyright text-center">
+						<span>&copy; 2023 ViraTrampo <i class="fa fa-heart"></i> </span>
+					</div>
+				</div>
+				<!-- .col-md-6 end -->
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</footer>
+	</div>
+	<!-- #wrapper end -->
+
+	<!-- Footer Scripts
+	============================================= -->
+	<script src="../static/js/jquery-2.2.4.min.js"></script>
+	<script src="../static/js/plugins.js"></script>
+	<script src="../static/js/functions.js"></script>
+	<script src="../static/js/script.js"></script>
+
+	<!-- Inclua a biblioteca jQuery no seu modelo -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Adicione uma imagem para mostrar o PDF -->
+<img id="pdf-viewer" src="" alt="PDF Viewer">
+
+<script>
+  $(document).ready(function() {
+    $('input').on('input', function() {
+      // Crie um objeto com os dados do formulário
+      var formData = {
+        nome: $('#nome').val(),
+        data_nascimento: $('#data_nascimento').val(),
+        // Adicione outros campos do formulário aqui
+      };
+
+      // Faça uma solicitação AJAX para o endpoint /generate-pdf
+      $.ajax({
+        type: 'POST',
+        url: '/generate-pdf',
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+          // Atualize a imagem com os dados do PDF retornado
+          $('#pdf-viewer').attr('src', 'data:application/pdf;base64,' + data.pdfData);
+        }
+      });
+    });
+  });
+</script>
+
+
+	<script>
+		// Quando o campo de CEP perder o foco
+		$('#cep').blur(function () {
+			// Remove caracteres não numéricos do CEP
+			var cep = $(this).val().replace(/\D/g, '');
+
+			// Verifica se o CEP possui 8 dígitos
+			if (cep.length === 8) {
+				// Faz a requisição AJAX para a API dos Correios
+				$.getJSON(`https://viacep.com.br/ws/${cep}/json/`, function (data) {
+					if (!data.erro) {
+						// Preenche os campos com os dados do CEP
+						$('#logradouro').val(data.logradouro);
+						$('#bairro').val(data.bairro);
+						$('#cidade').val(data.localidade);
+						$('#estado').val(data.uf);
+					} else {
+						alert('CEP não encontrado');
+					}
+				});
+			}
+		});
+	</script>
+	<script>
+		document.getElementById('avancar').addEventListener('click', function (e) {
+			// Seleciona todos os campos obrigatórios
+			var camposObrigatorios = document.querySelectorAll('[required]');
+
+			var todosPreenchidos = true;
+
+			// Verifica se todos os campos obrigatórios estão preenchidos
+			camposObrigatorios.forEach(function (campo) {
+				if (campo.value === '') {
+					todosPreenchidos = false;
+				}
+			});
+
+			if (!todosPreenchidos) {
+				// Informe ao usuário que todos os campos obrigatórios devem ser preenchidos.
+				alert('Por favor, preencha todos os campos obrigatórios antes de avançar. Seu currículo ficará incompleto :(');
+
+				// Impede o comportamento padrão do botão (navegar para a próxima página)
+				e.preventDefault();
+			}
+		});
+	</script>
+
+
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
+
+<script>
+	document.getElementById('downloadButton').addEventListener('click', function () {
+		// Fazer uma solicitação para gerar o PDF
+		fetch('/generate-pdf', {
+			method: 'POST',
+			body: new FormData(document.forms[0]), // Envie os dados do formulário se necessário
+		})
+			.then(response => response.json())
+			.then(data => {
+				// Redirecionar para 'itens.html' após a geração do PDF
+				window.location.href = data.redirect_url;
+			})
+			.catch(error => {
+				console.error('Erro:', error);
+			});
+	});
+
+</script>

@@ -1,0 +1,72 @@
+/*------------------------------------*\
+    #FORMS
+\*------------------------------------*/
+label{
+	font-weight: 300;
+	margin-bottom: 10px;
+	text-transform: capitalize
+}
+.form-control {
+    color: @color-body;
+    font-family:@font-body;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 45px;
+	height: 45px;
+    border: 1px solid e0e0e0;
+    background: transparent;
+    padding-left:24px;
+    margin-bottom: 15px;
+    position: relative;
+	border-radius: 3px;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.form-control:focus {
+	border-color: @color-theme;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+/* Placeholder */
+
+.form-control::-webkit-input-placeholder {
+	color:  @color-body;
+}
+
+.form-control:-moz-placeholder {
+	color:  @color-body;
+}
+
+.form-control::-moz-placeholder {
+	color:  @color-body;
+}
+
+.form-control:-ms-input-placeholder {
+	color: @color-body;
+}
+
+.input-group{
+border-radius: 25px;
+border: 1px solid #e0e0e0;
+background-color: transparent;
+	overflow: hidden;
+	padding: 0;
+}
+
+.input-group .btn{
+	border-radius: 0 25px 25px 0;
+}
+	
+.input-group .input-group-btn{ overflow: hidden;}
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) and (max-width : 767px) {
+	.input-group .btn{
+		width: 120px;
+	}
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+}

@@ -1,0 +1,181 @@
+/*------------------------------------*\
+    #Hero
+\*------------------------------------*/
+
+.header-transparent + .slider {
+	margin-top: -100px;
+}
+
+.slider {
+	height: 800px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.slider .slide--item {
+	height: 800px;
+}
+
+.slider .row-content{
+	padding-top:180px;
+}
+
+.slider .slide--headline {
+	color: @color-white;
+	font-family: @font-heading;
+	font-size: 60px;
+	font-weight: 400;
+	line-height: 70px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+}
+
+.slider .slide--bio {
+	color:@color-white;
+	font-family: @font-body;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 32px;
+	margin-bottom: 50px;
+}
+
+.slider .slide--holder {position: relative}
+.slider .input-group{
+	border: none;
+}
+.slider .input-group .form-control{
+	background-color: @color-white;
+}
+/* Slider Form */
+.slider-form {
+	padding-bottom: 50px;
+}
+.slider-form .row-content{
+	padding-top:120px;
+}
+.slider-form .slide--headline{
+	font-size: 50px;
+	line-height: 60px;
+	margin-bottom: 30px;
+}
+.slider-form .slide--bio{
+	font-size: 22px;
+	line-height: 32px;
+	margin-bottom: 32px;
+}
+.slider-form  .slide--action{
+	background: @color-white;
+	padding: 50px;
+	
+}
+.slider-form  .slide--action h6 {
+	font-size: 30px;
+font-weight: 400;
+	line-height: 1;
+	margin-bottom: 15px;
+	text-align: center;
+	text-transform: capitalize;
+	
+}
+.slider-form  .slide--action p{
+	font-size: 16px;
+font-weight: 400;
+	margin-bottom: 50px;
+	text-align: center;
+}
+.btn--video {
+	line-height: 55px;
+	font-size: 10px;
+font-weight: 400;
+	text-transform: uppercase;
+	color: @color-white
+}
+.btn--video i{
+	width: 55px;
+height: 55px;
+	line-height: 56px;
+	text-align: center;
+	border-radius: 50%;
+background-color: @color-white;
+	font-size: 12px;
+font-weight: 400;
+	color:@color-heading;
+	margin-right: 15px;
+}
+.btn--video:hover{
+	color:@color-heading;
+}
+.btn--video:hover i{
+	background: @color-heading;
+	color:@color-white;
+}
+.slider .bg-ytvideo{
+	min-height: 800px;
+}
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) and (max-width : 767px) {
+	.slider .row-content{
+		padding-top:60px;
+	}
+	.slider .slide--headline {
+		font-size: 30px;
+		line-height: 1.2;
+		text-align: center;
+		margin-top: 0;
+	}
+
+	.slider .slide--bio {
+		font-size: 14px;
+		line-height: 1.5;
+		padding: 0 10px;
+		text-align: center;
+		 margin-bottom: 20px;
+	}
+
+	.slider,
+	.slider .slide--item {
+		height: 500px;
+	}
+	.slider-form,
+	.slider .slide--item {
+		height: auto;
+		padding-bottom: 50px
+	}
+	.slide--video{
+		margin-bottom: 30px;
+		text-align: center;
+	}
+	.slider-form .slide--action {
+		padding: 20px;
+	}
+
+}
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) and (max-width : 991px) {
+	.slider,
+	.slider .slide--item {
+		height: 600px;
+	}
+	.slider .row-content{
+		padding-top: 80px;
+	}
+		.slider .slide--headline {
+		font-size: 30px;
+			line-height: 1.2;
+	}
+	.slider .slide--bio {
+		font-size: 14px;
+		line-height: 1.5;
+		    margin-bottom: 20px;
+	}
+	.slider-form,
+	.slider .slide--item {
+		height: auto;
+		padding-bottom: 50px
+	}
+	.slider-form .slide--action {
+		padding:30px;
+	}
+
+}
+
