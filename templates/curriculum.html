@@ -7,27 +7,34 @@
     <title>Currículo</title>
     <link rel="stylesheet" href="../static/css/curriculum.css">
     <style>
-       
+        .habilidades {
+            display: flex;
+          
+        }
+
+        .habilidades li {
+            margin-right: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+     
     </style>
 </head>
 
 <body>
 <h1>{{ user_data['nome'] }}</h1>
+<hr>
 <header>
     <section>
+    <ul class='contato'>
         <li>
-            <img src="../static/images/icon/envelope.png" alt="Envelope" style="width: 15px; height: 15px;margin: 5px;">
+           
             Email: {{ user_data['email'] }}
         </li>
             
             <li>Telefone: {{ user_data['telefone'] }}</li>
-            <li>GitHub: {{ user_data['github'] }}</li>
             <li>LinkedIn: {{ user_data['linkedin'] }}</li>
-        </ul>
-    </section>
-
-    <section>
-        <ul class='endereco'>
+     
             <li>CEP: {{ user_data['cep'] }}</li>
             <li>Bairro: {{ user_data['bairro'] }}</li>
             <li>Cidade: {{ user_data['cidade'] }}</li>
@@ -35,16 +42,18 @@
         </ul>
     </section>
 </header>
-   <hr>
+   
 
     <section>
-        <h2>Perfil</h2>
+        <h2>Perfil</h2>   
+         <hr>
         <p>{{ user_data['perfil'] }}</p>
     </section>
-    <hr>
 
+<br>
     <section>
         <h2>Objetivos e Educação</h2>
+        <hr>
         <p>Objetivos: {{ user_data['objetivos'] }}</p>
         <p>Área de Interesse: {{ user_data['area'] }}</p>
         <h3>Formação</h3>
@@ -54,13 +63,14 @@
         <p>Semestre: {{ user_data['semestre'] }}</p>
         <p>Curso: {{ user_data['curso'] }}</p>
     </section>
-    <hr>
+
 
     <section>
-    <h2>Habilidades Técnicas</h2>
+    <h2>Habilidades Técnicas</h2>  
+      <hr>
     <ul class="habilidades">
         {% for habilidade in user_data['habilidades'] %}
-            <li>{{ habilidade }}</li>
+            <li>{{ habilidade }} /</li>
         {% endfor %}
     </ul>
 </section>

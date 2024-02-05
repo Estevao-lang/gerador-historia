@@ -34,7 +34,6 @@ def generate_pdf():
         'nome': request.form.get('nome', ''),
         'dataNascimento': request.form.get('dataNascimento', ''),
         'email': request.form.get('email', ''),
-         'github': request.form.get('github', ''),
           'linkedin': request.form.get('linkedin', ''),
           'perfil': request.form.get('perfil', ''),
         'telefone': request.form.get('telefone', ''),

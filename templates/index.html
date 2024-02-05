@@ -131,10 +131,7 @@
 												<input type="text" name="email" placeholder="Seu email"
 													class="form-control">
 											</div><br>
-											<div class="col-sm-12">
-												<input type="text" name="github" placeholder="Seu GitHub"
-													class="form-control">
-											</div><br>
+										
 											<div class="col-sm-12">
 												<input class="form-control" placeholder="Seu Whatsapp" type="text"
 													id="telefone" name="telefone" maxlength="15"
@@ -427,16 +424,40 @@
 
 										<div class="button-container">
 											<button type="button" onclick="previousStep('step2')" class="btn btn-secondary">Voltar</button>
-											
-												<input type="submit" class="btn btn-primary" onclick="funcao1()" value="Avançar">
-											
+											<input type="submit" class="btn btn-primary" onclick="openModal()" value="Avançar">
 										</div>
+										
+										<!-- Modal -->
+										<div class="modal" tabindex="-1" role="dialog" id="successModal">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<img class='modal-img' src="..\static\images\logo\logo-dark-trampo.png" >
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														
+														Seu currículo foi baixado com sucesso! Verifique a pasta de downloads.
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+										<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+										<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+										
 										<script>
-											function funcao1() {
-												alert("Seu currículo foi baixado com sucesso! Verifique a pasta de downloads.");
-
+											function openModal() {
+												$('#successModal').modal('show');
 											}
 										</script>
+										
 
 								</form>
 							</div>
