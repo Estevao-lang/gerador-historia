@@ -126,13 +126,13 @@
 												<input type="text" name="nome" placeholder="Seu Nome"
 													class="form-control">
 											</div><br>
-											<div class="col-sm-12">
-												<input type="date" name="dataNascimento" id="dataNascimento"
-													placeholder="Data de nascimento" class="form-control"
-													max="{{ current_date }}">
-											</div><br>
+									
 											<div class="col-sm-12">
 												<input type="text" name="email" placeholder="Seu email"
+													class="form-control">
+											</div><br>
+											<div class="col-sm-12">
+												<input type="text" name="github" placeholder="Seu GitHub"
 													class="form-control">
 											</div><br>
 											<div class="col-sm-12">
@@ -140,6 +140,10 @@
 													id="telefone" name="telefone" maxlength="15"
 													oninput="formatPhoneNumber(this)">
 											</div>
+											<div class="col-sm-12">
+												<input type="text" name="linkedin" placeholder="Seu Likedin"
+													class="form-control">
+											</div><br>
 										</div>
 										<h3 class="step-texto">Endereço</h3>
 										<div class="row">
@@ -147,18 +151,7 @@
 												<input type="text" placeholder="Digite seu CEP" id="cep" name="cep"
 													maxlength="9" class="form-control">
 											</div>
-											<div class="col-sm-8">
-												<input type="text" name="logradouro" id="logradouro" placeholder="Rua"
-													class="form-control">
-											</div>
-											<div class="col-sm-4 ">
-												<input type="text" name="numero" id="numero" placeholder="Numero"
-													class="form-control">
-											</div>
-											<div class="col-sm-6 ">
-												<input type="text" name="complemento" id="complemento"
-													placeholder="Complemento" class="form-control">
-											</div>
+											
 											<div class="col-sm-6 ">
 												<input type="text" name="bairro" id="bairro" placeholder="Bairro"
 													class="form-control">
@@ -179,7 +172,14 @@
 										</div>
 									</div>
 									<div class="step" id="step2">
+										
 										<div class="row">
+											<div class="profile">
+												<h3 class="step-texto">Perfil</h3>
+												<div class="col-sm-12">
+													<textarea style="height: 100px; max-width: 250px; overflow-y: auto;" name="perfil" placeholder="Seu Perfil" class="form-control"></textarea>
+												</div><br>
+											</div>
 											<h3 class="step-texto">Selecione as suas habilidades</h3>
 											<div class="scrollable-div" style="max-height: 300px; overflow: auto;">
 												<label class="checkbox-container">Comunicação
@@ -356,28 +356,43 @@
 													</select>
 												</div>
 												<div class="col-sm-12">
-													<h6 for="periodo" id="labelPeriodo"></h6>
-													<label for="periodo" id="labelPeriodo" class="form-control"
-														style="display: none;"></label>
-													<select id="periodo" name="periodo" class="form-control"
-														style="display: none;">
-														<option value="">Selecione um período</option>
-													</select>
-													<h6 for="semestre" id="labelSemestre"></h6>
-													<label for="semestre" id="labelSemestre" class="form-control"
-														style="display: none;">Selecione
-														o
-														Semestre:</label>
-													<select id="semestre" name="semestre" style="display: none;"
-														class="form-control">
-														<option value="">Selecione um semestre</option>
-													</select>
-													<h6 for="curso" id="labelCurso"></h6>
-													<label for="curso" id="labelCurso" class="form-control"
-														style="display: none;">Curso:</label>
-													<select id="curso" name="curso" class="form-control"
-														style="display: none;">
-														<option value="">Selecione um curso</option>
+													<div class="form-group">
+														<label for="periodo">Período:</label>
+														<select id="periodo" name="periodo" class="form-control">
+															<option value="">Selecione um período</option>
+															<option value="manha">Manhã</option>
+															<option value="tarde">Tarde</option>
+															<option value="noite">Noite</option>
+														</select>
+													</div>
+												
+													<div class="form-group">
+														<label for="semestre">Semestre:</label>
+														<select id="semestre" name="semestre" class="form-control">
+															<option value="">Selecione um semestre</option>
+															<option value="primeiro">Primeiro</option>
+															<option value="segundo">Segundo</option>
+															<option value="terceiro">Terceiro</option>
+															<option value="quarto">Quarto</option>
+															<option value="quinto">Quinto</option>
+															<option value="sexto">Sexto</option>
+															<option value="setimo">Sétimo</option>
+															<option value="oitavo">Oitavo</option>
+															<option value="nono">Nono</option>
+															<option value="decimo">Décimo</option>
+															<option value="decimo-primeiro">Décimo Primeiro</option>
+															<option value="decimo-segundo">Décimo Segundo</option>
+															<option value="decimo-terceiro">Décimo Terceiro</option>
+															<option value="decimo-quarto">Décimo Quarto</option>
+															<option value="decimo-quinto">Décimo Quinto</option>
+															<!-- Add more semesters as needed -->
+														</select>
+													</div>
+												
+													<div class="form-group">
+														<label for="curso">Curso:</label>
+														<select id="curso" name="curso" class="form-control">
+															<option value="">Selecione um curso</option>
 														<option value="engenharia">Engenharia</option>
 														<option value="administracao">Administração</option>
 														<option value="direito">Direito</option>
@@ -404,10 +419,10 @@
 														</option>
 														<option value="ciencia-computacao">Ciência da Computação
 														</option>
-													</select>
+														</select>
+													</div>
 												</div>
-											</div>
-										</div>
+												
 										<!-- Adicione as bibliotecas necessárias -->
 
 										<div class="button-container">

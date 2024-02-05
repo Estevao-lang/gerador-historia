@@ -1,14 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
+section ul.habilidades {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+}
 
+section ul.habilidades li {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+ 
+    width: 48%;
+}
 body {
-    font-family: 'Outfit', Arial, sans-serif;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+
+    margin: 20px;
 }
 
 h1 {
@@ -23,12 +36,7 @@ h1 {
     font-size: 1.1em;
 }
 
-.linha {
-    width: 50vw;
-    height: 1px;
-    background-color: #333;
-    margin: 0vh 0 5vh 0;
-}
+
 
 main, section {
     margin-left: 5vw;
@@ -52,4 +60,13 @@ section p, .info p {
     margin-top: 1vh;
     margin-bottom: 1vh;
     font-size: 1.1em;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 5px;
+    list-style-type: none;
 }

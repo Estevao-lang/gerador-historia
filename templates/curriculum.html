@@ -3,53 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ user_data.nome }} - Currículo</title>
+    <title>Currículo</title>
     <link rel="stylesheet" href="../static/css/curriculum.css">
-
-    <!-- Adicione outros metadados ou links de estilo conforme necessário -->
+    <style>
+       
+    </style>
 </head>
 
 <body>
-    <main>
-        <div class='info'>
-            <h1 style="text-align: center;">{{ user_data.nome }}</h1>
-            <p>Data de Nascimento: {{ user_data.dataNascimento }}</p>
-            <p>Email: {{ user_data.email }}</p>
-            <p>Telefone: {{ user_data.telefone }}</p>
-            <p>Bairro: {{ user_data.bairro }}</p>
-            <p>Cidade: {{ user_data.cidade }}</p>
-            <p>Estado: {{ user_data.estado }}</p>
-        </div>
-        <hr>
-        <section>
-            <div class='conteudo'>
-                <h2>Objetivos Profissionais</h2>
-              
-                <p>{{ user_data.objetivos }}</p>
-                <hr>
-                <h2>Formação Acadêmica</h2>
-                
-                <p>Instituição: {{ user_data.instituicao_ensino }}</p>
-                <p>Nível: {{ user_data.nivel }}</p>
-                <p>Período: {{ user_data.periodo }}</p>
-                <p>Semestre: {{ user_data.semestre }}</p>
-                <p>Curso: {{ user_data.curso }}</p>
-                <hr>
-                <h2>Habilidades</h2>
-           
-                <ul class="habilidades">
-                    {% for habilidade in user_data.habilidades %}
-                        <li>{{ habilidade }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </section>
+<h1>{{ user_data['nome'] }}</h1>
+<header>
+    <section>
+        <li>
+            <img src="../static/images/icon/envelope.png" alt="Envelope" style="width: 15px; height: 15px;margin: 5px;">
+            Email: {{ user_data['email'] }}
+        </li>
+            
+            <li>Telefone: {{ user_data['telefone'] }}</li>
+            <li>GitHub: {{ user_data['github'] }}</li>
+            <li>LinkedIn: {{ user_data['linkedin'] }}</li>
+        </ul>
+    </section>
 
-        <!-- Adicione mais informações pessoais conforme necessário -->
-        <!-- Adicione mais seções conforme necessário -->
-    </main>
+    <section>
+        <ul class='endereco'>
+            <li>CEP: {{ user_data['cep'] }}</li>
+            <li>Bairro: {{ user_data['bairro'] }}</li>
+            <li>Cidade: {{ user_data['cidade'] }}</li>
+            <li>Estado: {{ user_data['estado'] }}</li>
+        </ul>
+    </section>
+</header>
+   <hr>
+
+    <section>
+        <h2>Perfil</h2>
+        <p>{{ user_data['perfil'] }}</p>
+    </section>
+    <hr>
+
+    <section>
+        <h2>Objetivos e Educação</h2>
+        <p>Objetivos: {{ user_data['objetivos'] }}</p>
+        <p>Área de Interesse: {{ user_data['area'] }}</p>
+        <h3>Formação</h3>
+        <p>Instituição: {{ user_data['instituicao_ensino'] }}</p>
+        <p>Nível: {{ user_data['nivel'] }}</p>
+        <p>Período: {{ user_data['periodo'] }}</p>
+        <p>Semestre: {{ user_data['semestre'] }}</p>
+        <p>Curso: {{ user_data['curso'] }}</p>
+    </section>
+    <hr>
+
+    <section>
+    <h2>Habilidades Técnicas</h2>
+    <ul class="habilidades">
+        {% for habilidade in user_data['habilidades'] %}
+            <li>{{ habilidade }}</li>
+        {% endfor %}
+    </ul>
+</section>
 </body>
 
 </html>
