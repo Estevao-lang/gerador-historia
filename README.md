@@ -14,7 +14,7 @@ Clone o repositório:
 
 bash
 Copy code
-git clone https://github.com/seu-usuario/flask-story-generator.git
+git clone https://github.com/Estevao-lang/gerador-historia.git
 Navegue até o diretório do projeto:
 
 bash
