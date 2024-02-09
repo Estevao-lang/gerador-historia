@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, make_response, session, redirect, url_for
-from reportlab.pdfgen import canvas
+from flask import Flask, render_template, request, make_response, session
+from io import BytesIO
+from xhtml2pdf import pisa
 import platform
 
 # Verifica se o sistema é Windows
@@ -8,7 +9,6 @@ if platform.system() == 'Windows':
     
     # Esta linha é necessária para evitar o erro relacionado ao módulo 'fcntl' no Windows
     multiprocessing.freeze_support()
-
 
 app = Flask(__name__)
 app.secret_key = 'vocacao'  # Defina uma chave secreta para a sessão
@@ -23,6 +23,21 @@ habilidades = [
     'espanhol-basico', 'espanhol-intermediario', 'espanhol-avancado'
 ]
 
+def generate_pdf_from_html(html):
+    buffer = BytesIO()
+    pisa.CreatePDF(BytesIO(html.encode('utf-8')), dest=buffer)
+    pdf_data = buffer.getvalue()
+    buffer.close()
+    return pdf_data
+
+def validate_form_data(user_data):
+    required_fields = ['nome', 'email', 'telefone', 'cep', 'bairro', 'cidade', 'estado', 'objetivos', 'area', 'instituicao_ensino', 'nivel', 'periodo', 'semestre', 'curso']
+
+    for field in required_fields:
+        if not user_data.get(field):
+            return f'O campo {field} é obrigatório. Por favor, preencha todos os campos obrigatórios.'
+
+    return None
 
 @app.route('/')
 def index():
@@ -34,8 +49,8 @@ def generate_pdf():
         'nome': request.form.get('nome', ''),
         'dataNascimento': request.form.get('dataNascimento', ''),
         'email': request.form.get('email', ''),
-          'linkedin': request.form.get('linkedin', ''),
-          'perfil': request.form.get('perfil', ''),
+        'linkedin': request.form.get('linkedin', ''),
+        'perfil': request.form.get('perfil', ''),
         'telefone': request.form.get('telefone', ''),
         'cep': request.form.get('cep', ''),
         'bairro': request.form.get('bairro', ''),
@@ -51,40 +66,19 @@ def generate_pdf():
         'habilidades': [habilidade for habilidade in habilidades if habilidade in request.form]
     }
 
-    # Armazena user_data na sessão
+    validation_error = validate_form_data(user_data)
+    if validation_error:
+        return render_template('error.html', message=validation_error)
+
     session['user_data'] = user_data
-
-    # Renderiza a página HTML com os dados do usuário
     rendered_html = render_template('curriculum.html', user_data=user_data)
-
-    # Gera o PDF usando a biblioteca reportlab
     pdf_data = generate_pdf_from_html(rendered_html)
 
-    # Cria uma resposta Flask com o PDF
     response = make_response(pdf_data)
     response.headers['Content-Disposition'] = 'attachment; filename=curriculum.pdf'
     response.headers['Content-Type'] = 'application/pdf'
 
     return response
-
-# Adicione user_data como argumento para a função render_template em 'itens.html'
-
-
-def generate_pdf_from_html(html):
-    from io import BytesIO
-    from xhtml2pdf import pisa
-
-    # Gera um buffer de BytesIO para armazenar o PDF
-    buffer = BytesIO()
-
-    # Converte o HTML para PDF
-    pisa.CreatePDF(BytesIO(html.encode('utf-8')), dest=buffer)
-
-    # Retorna os dados do buffer
-    pdf_data = buffer.getvalue()
-    buffer.close()
-
-    return pdf_data
 
 if __name__ == '__main__':
     app.run(debug=True)
